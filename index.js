@@ -1,19 +1,26 @@
-const mongoose=require('mongoose')
-console.log("connecting to mongodb")
+// import the mongoose module
+const mongoose = require('mongoose');
 
-//import the config module
-const config=require('./utils/config')
-const app =require('./app')
+// import the config module
+const config = require('./utils/config');
 
+// import the app module
+const app = require('./app');
+
+console.log('Connecting to MongoDB...');
+
+// Connect to MongoDB using mongoose
 mongoose.connect(config.MongoDB_URI)
-.then(()=>{
-    console.log('connected to the mongoodb')
-    app.listen(config.PORT,()=>{
-        console.log(`server is listening in ${config.PORT}`)
-    })
-    
-}).catch((error)=>{
-    console.log('error connecting to the mongodb',error.message)
-})
+    .then(() => {
+        console.log('Connected to MongoDB...');
+        
+        const PORT = config.PORT || 3001;
 
-//start the server
+        // start the server
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${config.PORT}`);
+        });
+    })
+    .catch((error) => {
+        console.log('Error connecting to MongoDB...', error.message);
+    })
