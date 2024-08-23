@@ -39,7 +39,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.head('/api', (req, res) => {
-    res.send('Welcome to the Job Portal API');
+    res.send({success:'Welcome to the Job Portal API'});
 });
 //define the environment
 app.use("/api/users", userRouter);
